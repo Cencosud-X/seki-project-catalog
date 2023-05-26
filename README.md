@@ -1,2 +1,4 @@
 # seki-project-catalog
-Plantillas de proyectos para Seki
+
+Este repositorior contiene plantillas de proyectos para tipos de proyectos internos de Seki,
+por ejemplo, extensiones de Seki.

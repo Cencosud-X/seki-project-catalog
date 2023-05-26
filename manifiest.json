@@ -1,0 +1,19 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Cencosud-X/seki-schemas/main/v1/projects/manifiestrc.schema.json",
+  "name": "Curated project types",
+  "author": {
+    "github_user": "dmunozgaete",
+    "name": "Team Seki"
+  },
+  "icons": {
+    "dark": "logo.svg",
+    "light": "logo.svg"
+  },
+  "descriptions": {
+    "en": "Project templates for Seki",
+    "es": "Plantillas de proyecto para Seki"
+  },
+  "types": [
+    "extension/typerc.json"
+  ]
+}
