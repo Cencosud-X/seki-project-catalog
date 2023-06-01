@@ -2,11 +2,9 @@
   "$schema": "https://raw.githubusercontent.com/Cencosud-X/seki-schemas/main/v1/projects/typerc.schema.json",
   "name": "Seki Extension",
   "tags": [
-    "Nestjs",
     "Extension",
     "Node",
-    "React",
-    "experimental"
+    "React"
   ],
   "kind": "extension",
   "folder": "apps",
