@@ -4,13 +4,88 @@
     {
       "properties": {
         "settings": {
-          "required": ["extensionId"],
+          "required": ["extensionId", "name", "minSupportedVersion", "tags", "visibility", "short_description", "description"],
           "type": "object",
           "description": "Specific configuration",
           "properties": {
             "extensionId": {
               "type": "string",
               "description": "The extension identifier. It should be short and descriptive. It must be unique. See available extensions here: https://github.com/Cencosud-X/seki-extensions"
+            },
+            "name": {
+              "type": "string",
+              "description": "Extension name"
+            },
+            "minSupportedVersion": {
+              "type": "string",
+              "description": "The minimun Seki version required for this extension",
+              "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(-rc[0-9]+|)$",
+              "default": "0.2.0"
+            },
+            "tags": {
+              "type": "array",
+              "description": "Array of tags, e.g., Database, Web, Monitoring",
+              "minItems": 1,
+              "items": {
+                "type": "string",
+                "minLength": 3,
+                "uniqueItems": true
+              }
+            },
+            "visibility": {
+              "type": "array",
+              "description": "Array of product that will have access to the extension or the keyword ALL that give access to every product.",
+              "minItems": 1,
+              "items": {
+                "type": "string",
+                "minLength": 3,
+                "uniqueItems": true
+              },
+              "default": ["ALL"]
+            },
+            "short_description": {
+              "type": "object",
+              "description": "A short description",
+              "required": ["es", "en"],
+              "properties": {
+                "es": {
+                  "type": "string",
+                  "description": "Short description in Spanish",
+                  "minLength": 3
+                },
+                "en": {
+                  "type": "string",
+                  "description": "Short description in English",
+                  "minLength": 3
+                },
+                "pt": {
+                  "type": "string",
+                  "description": "Short description in Portuguese",
+                  "minLength": 3
+                }
+              }
+            },
+            "description": {
+              "type": "object",
+              "description": "A long description",
+              "required": ["es", "en"],
+              "properties": {
+                "es": {
+                  "type": "string",
+                  "description": "Long description in Spanish",
+                  "minLength": 3
+                },
+                "en": {
+                  "type": "string",
+                  "description": "Long description in English",
+                  "minLength": 3
+                },
+                "pt": {
+                  "type": "string",
+                  "description": "Long description in Portuguese",
+                  "minLength": 3
+                }
+              }
             }
           }
         }
