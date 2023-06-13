@@ -4,7 +4,7 @@
     {
       "properties": {
         "settings": {
-          "required": ["extensionId", "name", "minSupportedVersion", "tags", "visibility", "short_description", "description"],
+          "required": ["extensionId", "name", "min_supported_version", "tags", "visibility", "label", "short_description", "description"],
           "type": "object",
           "description": "Specific configuration",
           "properties": {
@@ -16,7 +16,7 @@
               "type": "string",
               "description": "Extension name"
             },
-            "minSupportedVersion": {
+            "min_supported_version": {
               "type": "string",
               "description": "The minimun Seki version required for this extension",
               "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(-rc[0-9]+|)$",
@@ -42,6 +42,28 @@
                 "uniqueItems": true
               },
               "default": ["ALL"]
+            },
+            "label": {
+              "type": "object",
+              "description": "A label. If the extension is shown in tabs, this will be used as the tab title",
+              "required": ["es", "en"],
+              "properties": {
+                "es": {
+                  "type": "string",
+                  "description": "Label in Spanish",
+                  "minLength": 3
+                },
+                "en": {
+                  "type": "string",
+                  "description": "Label in English",
+                  "minLength": 3
+                },
+                "pt": {
+                  "type": "string",
+                  "description": "Label in Portuguese",
+                  "minLength": 3
+                }
+              }
             },
             "short_description": {
               "type": "object",
