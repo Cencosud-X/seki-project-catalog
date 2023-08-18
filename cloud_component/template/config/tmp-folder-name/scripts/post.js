@@ -15,8 +15,8 @@ module.exports = async (runner, args) => {
     //   `cat ${settingsJsonPath} > ${productConfigPath}/${rc.kind}_${rc.identifier}_settings.json`
     // ])
 
-    console.log('> POST: process ✅ DONE');
+    console.log('> POST: ✅ DONE');
   } catch (ex) {
-    throw new Error(`Failed run post script (${ex})`);
+    throw new Error(`> POST: Failed(${ex})`);
   }
 }
