@@ -1,30 +1,20 @@
 module.exports = async (runner, args) => {
   try {
-    console.log('> POST: Cleanup');
+    console.log('> POST');
     console.log(`args=${JSON.stringify(args)}`);
 
     const rc = args.rc;
     await runner.execute([
-      `echo '---------------'`,
-      `ls -alh`,
-      `echo '---------------'`,
-      `ls -alh apps`,
-      `echo '---------------'`,
+      `mv config/tmp-folder-name config/${rc.name}`,
+      `mv modules/tmp-folder-name modules/${rc.name}`,
+      `mv templates/tmp-folder-name templates/${rc.name}`
     ], {
-      cwd: rc.workspace_path
+      cwd: args.workspacePath
     })
-    // await runner.execute([
-    //   'rm -rf ./src/app',
-    //   'rm -rf ./src/assets',
-    //   'rm -rf ./src/environments',
-    //   `npx nx run ${rc.path}:secrets`
-    // ], {
-    //   cwd: args.workspacePath
-    // })
 
     console.log('> POST: ✅ DONE')
 
   } catch {
-    throw new Error('Failed to cleanup');
+    throw new Error('>POST Failed!');
   }
 }
