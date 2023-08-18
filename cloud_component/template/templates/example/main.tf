@@ -1,5 +1,5 @@
 module "redis" {
-  source = "../../modules/{{data.identifier}}"
+  source = "../../modules/{{data.name}}"
 
   name = "${var.product}-${var.environment}-${var.identifier}"
 
@@ -13,7 +13,7 @@ module "redis" {
 }
 
 output "outputs" {
-  value = module.{{data.identifier}}.outputs
+  value = module.{{data.name}}.outputs
   description = "Component output"
   sensitive = true
 }

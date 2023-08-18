@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = async (runner, args) => {
   try {
-    console.log('> POST: {{data.identifier}}');
+    console.log('> POST: {{data.name}}');
 
     // Write code to generate local resources. For example:
 
