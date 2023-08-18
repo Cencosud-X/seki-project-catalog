@@ -10,10 +10,11 @@
     "light": "logo.svg"
   },
   "descriptions": {
-    "en": "Project templates for Seki",
-    "es": "Plantillas de proyecto para Seki"
+    "en": "Templates for Seki internal projects",
+    "es": "Plantillas para proyectos internos de Seki"
   },
   "types": [
-    "extension/typerc.json"
+    "extension/typerc.json",
+    "cloud-component/typerc.json"
   ]
 }

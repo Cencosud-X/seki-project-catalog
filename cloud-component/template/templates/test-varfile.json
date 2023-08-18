@@ -1,0 +1,6 @@
+{
+    "product": "",
+    "environment": "staging",
+    "kind": "{{data.kind}}",
+    "identifier": "{{data.identifier}}"
+}

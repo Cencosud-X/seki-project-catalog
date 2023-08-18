@@ -1,0 +1,26 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Cencosud-X/seki-schemas/main/v1/projects/typerc.schema.json",
+  "name": "Cloud component",
+  "tags": [
+    "Cloud",
+    "Infrastructure"
+  ],
+  "kind": "cloud_component",
+  "folder": "apps",
+  "icons": {
+    "light": "icons/icon.svg",
+    "dark": "icons/icon.svg"
+  },
+  "descriptions": {
+    "es": "Plantilla de proyecto para componentes nube",
+    "en": "Cloud components project template"
+  },
+  "scripts": {
+    "pre": "scripts/pre.js",
+    "post": "scripts/post.js",
+    "rollback": "scripts/rollback.js"
+  },
+  "interpolations": {
+    "source": "template"
+  }
+}
