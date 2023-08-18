@@ -4,6 +4,15 @@ module.exports = async (runner, args) => {
     console.log(`args=${JSON.stringify(args)}`);
 
     const rc = args.rc;
+    await runner.execute([
+      `echo '---------------'`,
+      `ls -alh`,
+      `echo '---------------'`,
+      `ls -alh apps`,
+      `echo '---------------'`,
+    ], {
+      cwd: rc.workspace_path
+    })
     // await runner.execute([
     //   'rm -rf ./src/app',
     //   'rm -rf ./src/assets',
