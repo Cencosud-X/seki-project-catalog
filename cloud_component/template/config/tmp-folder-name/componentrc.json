@@ -2,7 +2,7 @@
   "$schema": "https://raw.githubusercontent.com/Cencosud-X/seki-schemas/main/v1/cloud/componentrc.schema.json",
   "name": "{{data.name}}",
   "kind": "{{data.name}}",
-  "owner": ["seki"],
+  "owner": ["{{data.product.name}}"],
   "visibility": "internal",
   "tags": ["experimental"],
   "icons": {
