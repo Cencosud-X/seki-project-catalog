@@ -24,5 +24,6 @@
   "interpolations": {
     "source": "template"
   },
-  "output": "settings.json"
+  "output": "settings.json",
+  "srcRepoUrl": "{{rc.definition.url}}"
 }
