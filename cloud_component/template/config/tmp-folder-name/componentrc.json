@@ -25,5 +25,5 @@
     "source": "template"
   },
   "output": "settings.json",
-  "srcRepoUrl": "{{rc.definition.url}}"
+  "srcRepoUrl": "Put your repo URL here. For example: https://github.com/Cencosud-xlabs/x-provisioners"
 }
