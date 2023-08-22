@@ -1,4 +1,4 @@
-module "redis" {
+module "{{data.name}}" {
   source = "../../modules/{{data.name}}"
 
   name = "${var.product}-${var.environment}-${var.identifier}"
