@@ -3,22 +3,6 @@ const { exec } = require('child_process');
 
 module.exports = async (runner, args) => {
 
-  function getRemote() {
-    const command = `git remote -v | grep push`;
-    exec(command, {cwd: args.workspacePath}, (error, stdout, stderr) => {
-
-      console.log(`command=${command}`)
-      console.log(`args.workspacePath=${args.workspacePath}`)
-      console.log(`stdout=${stdout}`)
-
-      if (error) {
-        console.log(`Error executing command: ${error.message}`);
-        return;
-      }
-      return stdout.trim();
-    });
-  }
-
   function extractOrgAndRepoFromGitRemote(remote) {
     // Regular expression to match Git remote URL format
     const remoteRegex = /origin\s+git@[^:]+:([^\/]+)\/([^\/]+?)\.git\s+\(push\)/;
@@ -71,20 +55,31 @@ module.exports = async (runner, args) => {
 
   try {
     // find organization and repository
-    const remoteURI = getRemote()
-    if (!remoteURI) throw new Error("Could not find the Git remote");
-    const orgAndRepo = extractOrgAndRepoFromGitRemote(remoteURI);
-    if (orgAndRepo) {
-        // replace srcRepoUrl
-        updateRepoUrl(`${args.workspacePath}/config/tmp-folder-name/componentrc.json`, `https://github.com/${orgAndRepo.organization}/${orgAndRepo.repository}`);
-    } else {
-      throw new Error("Could not detect your repo and organization from your Git remote URI");
-    }
+    const command = `git remote -v | grep push`;
+    exec(command, {cwd: args.workspacePath}, (error, stdout, stderr) => {
+      if (error) {
+        throw new Error(`Error executing command: ${error.message}`);
+      }
+      const remoteURI = stdout.trim();
+      console.log(`remoteURI=${remoteURI}`);
+      if (!remoteURI) {
+        throw new Error("Could not find the Git remote");
+      }
+      const orgAndRepo = extractOrgAndRepoFromGitRemote(remoteURI);
+      if (orgAndRepo) {
+          // replace srcRepoUrl
+          const componentRcFile = `${args.workspacePath}/config/tmp-folder-name/componentrc.json`;
+          const srcRepoUrl = `https://github.com/${orgAndRepo.organization}/${orgAndRepo.repository}`;
+          updateRepoUrl(componentRcFile, srcRepoUrl);
+      } else {
+        throw new Error("Could not detect your repo and organization from your Git remote URI");
+      }
+    });
   } catch(ex) {
-    console.log(`We couldn't detect your Git remote URL because of this error: ${ex}`)
-    console.log(`You must put your repository URL in componentrc.json`)
-    console.log(`For example`)
-    console.log(`"srcRepoUrl": "https://github.com/<organization>/<repository>"`)
+    console.log(`We couldn't detect your Git remote URL because of this error: ${ex}`);
+    console.log(`You must put your repository URL in componentrc.json`);
+    console.log(`For example`);
+    console.log(`"srcRepoUrl": "https://github.com/<organization>/<repository>"`);
   }
 
   try {
