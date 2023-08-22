@@ -51,7 +51,6 @@ module.exports = async (runner, args) => {
   }
 
   console.log('> POST');
-  console.log(`args=${JSON.stringify(args)}`);
 
   try {
     // find organization and repository
@@ -61,7 +60,6 @@ module.exports = async (runner, args) => {
         throw new Error(`Error executing command: ${error.message}`);
       }
       const remoteURI = stdout.trim();
-      console.log(`remoteURI=${remoteURI}`);
       if (!remoteURI) {
         throw new Error("Could not find the Git remote");
       }
@@ -77,7 +75,7 @@ module.exports = async (runner, args) => {
     });
   } catch(ex) {
     console.log(`We couldn't detect your Git remote URL because of this error: ${ex}`);
-    console.log(`You must put your repository URL in componentrc.json`);
+    console.log(`You must set your repository URL in componentrc.json`);
     console.log(`For example`);
     console.log(`"srcRepoUrl": "https://github.com/<organization>/<repository>"`);
   }
