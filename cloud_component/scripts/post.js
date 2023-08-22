@@ -6,7 +6,7 @@ module.exports = async (runner, args) => {
   function getRemote() {
     exec(`git remote -v | grep push`, {cwd: args.workspacePath}, (error, stdout, stderr) => {
       if (error) {
-        console.error(`Error executing command: ${error.message}`);
+        console.log(`Error executing command: ${error.message}`);
         return;
       }
       return stdout.trim();
@@ -32,7 +32,7 @@ module.exports = async (runner, args) => {
     // Read the JSON file
     fs.readFile(filePath, 'utf8', (err, data) => {
       if (err) {
-        console.error('Error reading the JSON file:', err);
+        console.log('Error reading the JSON file:', err);
         return;
       }
   
@@ -49,13 +49,13 @@ module.exports = async (runner, args) => {
         // Write the updated JSON back to the file
         fs.writeFile(filePath, updatedJsonData, 'utf8', (writeErr) => {
           if (writeErr) {
-            console.error('Error writing updated JSON to the file:', writeErr);
+            console.log('Error writing updated JSON to the file:', writeErr);
             return;
           }
           console.log('JSON updated successfully!');
         });
       } catch (parseErr) {
-        console.error('Error parsing JSON:', parseErr);
+        console.log('Error parsing JSON:', parseErr);
       }
     });
   }
@@ -70,12 +70,12 @@ module.exports = async (runner, args) => {
     const orgAndRepo = extractOrgAndRepoFromGitRemote(remoteURI);
     if (orgAndRepo) {
         // replace srcRepoUrl
-        updateRepoUrl(`config/tmp-folder-name/componentrc.json`, `https://github.com/${orgAndRepo.organization}/${orgAndRepo.repository}`);
+        updateRepoUrl(`${args.workspacePath}/config/tmp-folder-name/componentrc.json`, `https://github.com/${orgAndRepo.organization}/${orgAndRepo.repository}`);
     } else {
       throw new Error("Could not detect your repo and organization from your Git remote URI");
     }
   } catch(ex) {
-    console.error(`We couldn't detect your Git remote URL because of this error: ${ex}`)
+    console.log(`We couldn't detect your Git remote URL because of this error: ${ex}`)
     console.log(`You must put your repository URL in componentrc.json`)
     console.log(`For example`)
     console.log(`"srcRepoUrl": "https://github.com/<organization>/<repository>"`)
