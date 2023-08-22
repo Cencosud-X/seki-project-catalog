@@ -4,7 +4,7 @@ const { exec } = require('child_process');
 module.exports = async (runner, args) => {
 
   function getRemote() {
-    exec(`git remote -v | grep push`, (error, stdout, stderr) => {
+    exec(`git remote -v | grep push`, {cwd: args.workspacePath}, (error, stdout, stderr) => {
       if (error) {
         console.error(`Error executing command: ${error.message}`);
         return;
