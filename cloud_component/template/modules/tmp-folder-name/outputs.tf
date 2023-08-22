@@ -1,6 +1,6 @@
 output "outputs" {
   value = {
-    kind = vars.kind
-    identifier = vars.identifier
+    kind = var.kind
+    identifier = var.identifier
   }
 }
