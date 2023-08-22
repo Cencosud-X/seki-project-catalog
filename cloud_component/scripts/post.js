@@ -8,7 +8,7 @@ module.exports = async (runner, args) => {
     exec(command, {cwd: args.workspacePath}, (error, stdout, stderr) => {
 
       console.log(`command=${command}`)
-      console.log(`workspacePath=${workspacePath}`)
+      console.log(`args.workspacePath=${args.workspacePath}`)
       console.log(`stdout=${stdout}`)
 
       if (error) {
