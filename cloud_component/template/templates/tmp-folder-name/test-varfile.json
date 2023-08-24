@@ -1,6 +1,6 @@
 {
     "product": "",
     "environment": "staging",
-    "kind": "{{data.kind}}",
-    "identifier": "{{data.name}}"
+    "kind": "{{data.name}}",
+    "identifier": "default"
 }
