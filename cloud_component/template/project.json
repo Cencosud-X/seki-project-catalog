@@ -1,32 +1,71 @@
 {
-    "$schema": "../../node_modules/nx/schemas/project-schema.json",
-    "sourceRoot": "apps/{{data.name}}",
-    "projectType": "application",
-    "targets": {
-      "build": {
-        "dependsOn": [
-          {
-            "target": "secrets",
-            "projects": "self"
-          }
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/{{data.name}}",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "commands": [
+          "mkdir -p dist/apps",
+          "cp -r apps/{{data.name}} dist/apps"
         ],
-        "executor": "nx:run-commands",
-        "outputs": ["{options.outputPath}"],
-        "options": {
-          "commands": [
-            "mkdir -p dist/apps",
-            "cp -r apps/{{data.name}} dist/apps"
-          ],
-          "outputPath": "dist/apps/{{data.name}}"
-        }
-      },
-      "secrets": {
-        "executor": "nx:run-commands",
-        "options": {
-          "command": "seki secrets generate -p={{data.name}}",
-          "cwd": "."
-        }
+        "parallel": false,
+        "outputPath": "dist/apps/{{data.name}}"
       }
     },
-    "tags": ["REQUIRED:GOLDEN"]
-  }
+    "clean": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "rm -rf dist/apps/{{data.name}}"
+        ]
+      }
+    },
+    "init": {
+      "dependsOn": [
+        {
+          "target": "build",
+          "projects": "self"
+        }
+      ],
+      "executor": "nx:run-commands",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "commands": [
+          "terraform init"
+        ],
+        "parallel": false,
+        "cwd": "dist/apps/{{data.name}}/templates/{{data.name}}",
+        "outputPath": "dist/apps/{{data.name}}"
+      }
+    },
+    "apply": {
+      "dependsOn": [
+        {
+          "target": "init",
+          "projects": "self"
+        }
+      ],
+      "executor": "nx:run-commands",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "commands": [
+          "terraform apply -var-file test-varfile.json"
+        ],
+        "parallel": false,
+        "cwd": "dist/apps/{{data.name}}/templates/{{data.name}}",
+        "outputPath": "dist/apps/{{data.name}}"
+      }
+    },
+    "secrets": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "seki secrets generate -p={{data.name}}",
+        "cwd": "."
+      }
+    }
+  },
+  "tags": ["REQUIRED:GOLDEN"]
+}
