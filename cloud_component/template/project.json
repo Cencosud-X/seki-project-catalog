@@ -41,7 +41,25 @@
         "outputPath": "dist/apps/{{data.name}}"
       }
     },
-    "apply": {
+    "plan": {
+      "dependsOn": [
+        {
+          "target": "init",
+          "projects": "self"
+        }
+      ],
+      "executor": "nx:run-commands",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "commands": [
+          "terraform plan -var-file test-varfile.json"
+        ],
+        "parallel": false,
+        "cwd": "dist/apps/{{data.name}}/templates/{{data.name}}",
+        "outputPath": "dist/apps/{{data.name}}"
+      }
+    },
+    "test": {
       "dependsOn": [
         {
           "target": "init",
