@@ -50,6 +50,41 @@ module.exports = async (runner, args) => {
     });
   }
 
+  function updateWorkspace(filePath, projectName, projectdir) {
+    // Read the JSON file
+    fs.readFile(filePath, 'utf8', (err, data) => {
+      if (err) {
+        console.log('Error reading the JSON file:', err);
+        return;
+      }
+  
+      try {
+        // Parse the JSON data
+        const jsonData = JSON.parse(data);
+  
+        // add project
+        if (!jsonData.projects) {
+          jsonData["projects"] = {}
+        }
+        jsonData.projects[projectName] = projectdir
+
+        // Convert the updated JSON object back to a string
+        const updatedJsonData = JSON.stringify(jsonData, null, 2);
+  
+        // Write the updated JSON back to the file
+        fs.writeFile(filePath, updatedJsonData, 'utf8', (writeErr) => {
+          if (writeErr) {
+            console.log('Error writing updated JSON to the file:', writeErr);
+            return;
+          }
+          console.log('JSON updated successfully!');
+        });
+      } catch (parseErr) {
+        console.log('Error parsing JSON:', parseErr);
+      }
+    });
+  }
+
   console.log('> POST');
 
   try {
@@ -91,7 +126,19 @@ module.exports = async (runner, args) => {
     })
 
     console.log('> POST: ✅ DONE')
+  } catch {
+    throw new Error('>POST Failed!');
+  }
 
+  // support for nx < 15.9
+  // update workspace.json
+  try {
+    const workspaceFile = `${args.workspacePath}/workspace.json`
+    console.log(`workspaceFile=${workspaceFile}`)
+    if (fs.existsSync(workspaceFile)) {
+      console.log(`updateWorkspace(${workspaceFile}, ${rc.name}, ${rc.group_folder}/${rc.path})`)
+      updateWorkspace(workspaceFile, rc.name, `${rc.group_folder}/${rc.path}`)
+    }
   } catch {
     throw new Error('>POST Failed!');
   }
