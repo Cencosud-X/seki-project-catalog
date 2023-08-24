@@ -84,5 +84,6 @@
         "cwd": "."
       }
     }
-  }
+  },
+  "tags": ["REQUIRED:GOLDEN"]
 }
