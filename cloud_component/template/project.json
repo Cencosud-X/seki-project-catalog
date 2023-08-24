@@ -10,8 +10,13 @@
             "projects": "self"
           }
         ],
+        "executor": "nx:run-commands",
         "outputs": ["{options.outputPath}"],
         "options": {
+          "commands": [
+            "mkdir -p dist/apps",
+            "cp -r apps/{{data.name}} dist/apps"
+          ],
           "outputPath": "dist/apps/{{data.name}}"
         }
       },
@@ -25,4 +30,3 @@
     },
     "tags": ["REQUIRED:GOLDEN"]
   }
-  
