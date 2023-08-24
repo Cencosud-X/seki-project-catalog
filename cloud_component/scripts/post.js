@@ -101,7 +101,7 @@ module.exports = async (runner, args) => {
       const orgAndRepo = extractOrgAndRepoFromGitRemote(remoteURI);
       if (orgAndRepo) {
           // replace srcRepoUrl
-          const componentRcFile = `${args.workspacePath}/config/tmp-folder-name/componentrc.json`;
+          const componentRcFile = `${args.workspacePath}/metadata/tmp-folder-name/componentrc.json`;
           const srcRepoUrl = `https://github.com/${orgAndRepo.organization}/${orgAndRepo.repository}`;
           updateRepoUrl(componentRcFile, srcRepoUrl);
       } else {
@@ -118,7 +118,7 @@ module.exports = async (runner, args) => {
   const rc = args.rc;
   try {
     await runner.execute([
-      `mv config/tmp-folder-name config/${rc.name}`,
+      `mv metadata/tmp-folder-name metadata/${rc.name}`,
       `mv modules/tmp-folder-name modules/${rc.name}`,
       `mv templates/tmp-folder-name templates/${rc.name}`
     ], {

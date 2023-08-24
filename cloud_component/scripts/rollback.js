@@ -4,7 +4,7 @@ module.exports = async (runner, args) => {
 
     const rc = args.rc;
     await runner.execute([
-      `rm -rf config/${rc.name}`,
+      `rm -rf metadata/${rc.name}`,
       `rm -rf modules/${rc.name}`,
       `rm -rf templates/${rc.name}`
     ], {
