@@ -115,8 +115,8 @@ module.exports = async (runner, args) => {
     console.log(`"srcRepoUrl": "https://github.com/<organization>/<repository>"`);
   }
 
+  const rc = args.rc;
   try {
-    const rc = args.rc;
     await runner.execute([
       `mv config/tmp-folder-name config/${rc.name}`,
       `mv modules/tmp-folder-name modules/${rc.name}`,
@@ -133,7 +133,7 @@ module.exports = async (runner, args) => {
   // support for nx < 15.9
   // update workspace.json
   try {
-    const workspaceFile = `${args.workspacePath}/workspace.json`
+    const workspaceFile = `${rc.workspace_path}/workspace.json`
     console.log(`workspaceFile=${workspaceFile}`)
     if (fs.existsSync(workspaceFile)) {
       console.log(`updateWorkspace(${workspaceFile}, ${rc.name}, ${rc.group_folder}/${rc.path})`)

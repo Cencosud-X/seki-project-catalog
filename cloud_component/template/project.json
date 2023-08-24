@@ -1,0 +1,28 @@
+{
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "apps/{{data.name}}",
+    "projectType": "application",
+    "targets": {
+      "build": {
+        "dependsOn": [
+          {
+            "target": "secrets",
+            "projects": "self"
+          }
+        ],
+        "outputs": ["{options.outputPath}"],
+        "options": {
+          "outputPath": "dist/apps/{{data.name}}"
+        }
+      },
+      "secrets": {
+        "executor": "nx:run-commands",
+        "options": {
+          "command": "seki secrets generate -p={{data.name}}",
+          "cwd": "."
+        }
+      }
+    },
+    "tags": ["REQUIRED:GOLDEN"]
+  }
+  
