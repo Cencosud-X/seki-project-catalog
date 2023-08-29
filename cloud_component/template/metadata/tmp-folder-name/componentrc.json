@@ -3,7 +3,7 @@
   "name": "{{data.name}}",
   "kind": "{{data.name}}",
   "owner": ["{{data.product.name}}"],
-  "visibility": "internal",
+  "visibility": "private",
   "tags": ["experimental"],
   "icons": {
     "light": "icons/icon-white.svg",
