@@ -8,6 +8,16 @@
           "type": "object",
           "description": "Specific configuration",
           "properties": {
+            "metadataRepoUrl": {
+              "type": "string",
+              "default": "https://github.com/Cencosud-X/seki-cloud-components",
+              "description": "The URL to the metadata repository, for example: https://github.com/Cencosud-X/seki-cloud-components"
+            },
+            "provisionerRepoUrl": {
+              "type": "string",
+              "default": "https://github.com/Cencosud-xlabs/x-provisioners",
+              "description": "The URL to the repository where the Terraform code resides, for example: https://github.com/Cencosud-xlabs/x-provisioners"
+            }            
           }
         }
       }
