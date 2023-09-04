@@ -18,7 +18,7 @@ module.exports = async (runner, args) => {
     }
   }
 
-  function updateRepoUrl(filePath, url) {
+  function updateSettings(filePath, url, repository) {
     // Read the JSON file
     fs.readFile(filePath, 'utf8', (err, data) => {
       if (err) {
@@ -30,8 +30,9 @@ module.exports = async (runner, args) => {
         // Parse the JSON data
         const jsonData = JSON.parse(data);
   
-        // Update the srcRepoUrl attribute
+        // Update
         jsonData.srcRepoUrl = url;
+        jsonData.creator = repository;
   
         // Convert the updated JSON object back to a string
         const updatedJsonData = JSON.stringify(jsonData, null, 2);
@@ -103,7 +104,7 @@ module.exports = async (runner, args) => {
           // replace srcRepoUrl
           const componentRcFile = `${args.workspacePath}/metadata/tmp-folder-name/componentrc.json`;
           const srcRepoUrl = `https://github.com/${orgAndRepo.organization}/${orgAndRepo.repository}`;
-          updateRepoUrl(componentRcFile, srcRepoUrl);
+          updateSettings(componentRcFile, srcRepoUrl, orgAndRepo.repository);
       } else {
         throw new Error("Could not detect your repo and organization from your Git remote URI");
       }
