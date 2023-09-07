@@ -2,5 +2,8 @@
     "product": "",
     "environment": "staging",
     "kind": "{{data.name}}",
-    "identifier": "default"
+    "identifier": "default",
+
+    "my_var1": "test_value",
+    "my_secret_token": "test_secret"
 }
