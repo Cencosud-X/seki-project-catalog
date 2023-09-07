@@ -5,7 +5,7 @@ resource "null_resource" "hello" {
   }
 }
 
-resource "null_resource" "runtime variables" {
+resource "null_resource" "var_example" {
   provisioner "local-exec" {
     command = "echo 'my_var1=${var.my_var1}'"
   }

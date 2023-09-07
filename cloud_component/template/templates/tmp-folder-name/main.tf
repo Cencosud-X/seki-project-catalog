@@ -5,6 +5,9 @@ module "{{data.name}}" {
   environment = var.environment
   kind = var.kind
   identifier = var.identifier
+
+  # example variable
+  my_var1 = var.my_var1
 }
 
 output "outputs" {
